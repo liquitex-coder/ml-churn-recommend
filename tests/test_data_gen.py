@@ -64,7 +64,8 @@ def test_reproducible_seed():
 
 def test_write_and_load_offline(tmp_path):
     # covers: NFR-2  -- data persists to CSV and reloads with no network
+    # Write to a tmp dir so the test never clobbers the committed demo sample.
     tables = data_gen.generate_all(n_customers=50, n_texts=120, seed=1)
-    data_gen.write_csvs(tables)
-    loaded = data_gen.load_csvs()
+    data_gen.write_csvs(tables, tmp_path)
+    loaded = data_gen.load_csvs(tmp_path)
     assert len(loaded["customers"]) == len(tables["customers"])
