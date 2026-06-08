@@ -18,15 +18,14 @@ SRC = Path(__file__).resolve().parent / "src"
 if str(SRC) not in sys.path:
     sys.path.insert(0, str(SRC))
 
-import pandas as pd
-import plotly.express as px
-import streamlit as st
+import plotly.express as px  # noqa: E402
+import streamlit as st  # noqa: E402
 
-from churn_recommend import config, data_gen
-from churn_recommend.churn_model import build_feature_frame, train_churn_model
-from churn_recommend.explain import ChurnExplainer
-from churn_recommend.recommend import CrossSellRecommender
-from churn_recommend.text_analytics import compute_churn_hint_scores
+from churn_recommend import config, data_gen  # noqa: E402
+from churn_recommend.churn_model import build_feature_frame, train_churn_model  # noqa: E402
+from churn_recommend.explain import ChurnExplainer  # noqa: E402
+from churn_recommend.recommend import CrossSellRecommender  # noqa: E402
+from churn_recommend.text_analytics import compute_churn_hint_scores  # noqa: E402
 
 
 @st.cache_data(show_spinner=False)
@@ -39,10 +38,8 @@ def _load_tables() -> dict:
     return data_gen.load_csvs()
 
 
-@st.cache_resource(show_spinner=False)
-def _build_pipeline():
-    """Train model + build recommender once and reuse across reruns."""
-    tables = _load_tables()
+def _pipeline_core(tables: dict) -> dict:
+    """Train model + build recommender from a tables dict (sample or uploaded)."""
     customers = tables["customers"]
     support_texts = tables["support_texts"]
     purchases = tables["purchases"]
@@ -67,12 +64,60 @@ def _build_pipeline():
     }
 
 
+@st.cache_resource(show_spinner=False)
+def _build_pipeline():
+    """Sample path: train once and reuse across reruns."""
+    return _pipeline_core(_load_tables())
+
+
+def _pipeline_from_upload() -> dict:
+    """Upload path: read user CSVs (customers required; purchases/support optional,
+    falling back to the sample), validate, and build the pipeline fresh."""
+    sample = _load_tables()
+    st.sidebar.download_button(
+        "顧客テンプレCSV / customers template",
+        sample["customers"].to_csv(index=False).encode("utf-8"),
+        file_name="customers_template.csv", mime="text/csv",
+        help="この列構成に合わせてアップロードしてください。",
+    )
+    st.sidebar.caption("顧客の必須列: " + ", ".join(data_gen.REQUIRED_CUSTOMER_COLUMNS))
+    cust_f = st.sidebar.file_uploader("顧客CSV / customers（必須）", type="csv", key="cust")
+    pur_f = st.sidebar.file_uploader("購買CSV / purchases（任意）", type="csv", key="pur")
+    sup_f = st.sidebar.file_uploader("問い合わせCSV / support_texts（任意）", type="csv", key="sup")
+
+    if cust_f is None:
+        st.info("顧客CSVをアップロードするか、左で『サンプルデータ』を選んでください。"
+                " / Upload a customers CSV or pick 'Sample'.")
+        st.stop()
+    try:
+        customers = data_gen.read_customers_csv(cust_f)
+        purchases = data_gen.read_purchases_csv(pur_f) if pur_f else sample["purchases"]
+        support = data_gen.read_support_csv(sup_f) if sup_f else sample["support_texts"]
+    except ValueError as e:
+        st.error(str(e))
+        st.stop()
+    st.sidebar.success(f"顧客 / customers: {len(customers):,} 件読込")
+    return _pipeline_core(
+        {"customers": customers, "purchases": purchases, "support_texts": support}
+    )
+
+
 def main() -> None:
     st.set_page_config(page_title="Churn & Cross-Sell CRM", layout="wide")
     st.title("顧客離脱予兆検知 兼 クロスセル推奨 ダッシュボード")
     st.caption("Churn risk detection + SHAP explanation + cross-sell recommendations")
 
-    pipe = _build_pipeline()
+    # ---- Data source: sample (default) or user upload ----
+    st.sidebar.header("データソース / Data source")
+    source = st.sidebar.radio(
+        "入力データ / Input data",
+        ["サンプルデータ / Sample", "CSVアップロード / Upload CSV"],
+        help="自社の顧客データをアップロードするか、同梱サンプルで試せます。",
+    )
+    if source.startswith("CSV"):
+        pipe = _pipeline_from_upload()
+    else:
+        pipe = _build_pipeline()
     customers = pipe["customers"]
     model = pipe["model"]
 

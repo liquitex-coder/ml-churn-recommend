@@ -205,17 +205,66 @@ def generate_all(
 
 
 def write_csvs(tables: dict[str, pd.DataFrame], data_dir: Path = config.DATA_DIR) -> None:
-    """Persist the generated tables to data/*.csv."""
+    """Persist the generated tables to ``data_dir``/*.csv.
+
+    Honours ``data_dir`` (was previously hardcoded to the package data dir, which
+    meant tests calling ``write_csvs`` clobbered the committed demo sample).
+    """
     data_dir.mkdir(parents=True, exist_ok=True)
-    tables["customers"].to_csv(config.CUSTOMERS_CSV, index=False)
-    tables["purchases"].to_csv(config.PURCHASES_CSV, index=False)
-    tables["support_texts"].to_csv(config.SUPPORT_TEXTS_CSV, index=False)
+    tables["customers"].to_csv(data_dir / config.CUSTOMERS_CSV.name, index=False)
+    tables["purchases"].to_csv(data_dir / config.PURCHASES_CSV.name, index=False)
+    tables["support_texts"].to_csv(data_dir / config.SUPPORT_TEXTS_CSV.name, index=False)
 
 
 def load_csvs(data_dir: Path = config.DATA_DIR) -> dict[str, pd.DataFrame]:
-    """Load the committed sample CSVs (offline, NFR-2)."""
+    """Load the sample CSVs from ``data_dir`` (offline, NFR-2)."""
     return {
-        "customers": pd.read_csv(config.CUSTOMERS_CSV),
-        "purchases": pd.read_csv(config.PURCHASES_CSV),
-        "support_texts": pd.read_csv(config.SUPPORT_TEXTS_CSV),
+        "customers": pd.read_csv(data_dir / config.CUSTOMERS_CSV.name),
+        "purchases": pd.read_csv(data_dir / config.PURCHASES_CSV.name),
+        "support_texts": pd.read_csv(data_dir / config.SUPPORT_TEXTS_CSV.name),
     }
+
+
+# --- User-supplied data (UI upload) -----------------------------------------
+# The customers table is the one the churn model needs; ``purchases`` (cross-sell)
+# and ``support_texts`` (text feature) are optional and fall back to the sample
+# when a user does not provide them.
+REQUIRED_CUSTOMER_COLUMNS: tuple[str, ...] = (
+    "customer_id",
+    *config.NUMERIC_FEATURES,
+    *config.CATEGORICAL_FEATURES,
+    config.TARGET,
+)
+REQUIRED_PURCHASE_COLUMNS: tuple[str, ...] = ("customer_id", "product")
+REQUIRED_SUPPORT_COLUMNS: tuple[str, ...] = ("customer_id", "text")
+
+
+def validate_customers_df(df: pd.DataFrame) -> list[str]:
+    """Return the required customer columns missing from ``df`` (empty = valid)."""
+    return [c for c in REQUIRED_CUSTOMER_COLUMNS if c not in df.columns]
+
+
+def _read_validated(source, required: tuple[str, ...], label: str) -> pd.DataFrame:
+    df = pd.read_csv(source)
+    missing = [c for c in required if c not in df.columns]
+    if missing:
+        raise ValueError(
+            f"{label} CSV に必須列がありません / missing required columns: "
+            + ", ".join(missing)
+        )
+    return df
+
+
+def read_customers_csv(source) -> pd.DataFrame:
+    """Parse + validate a user-uploaded customers CSV (raises ValueError on missing cols)."""
+    return _read_validated(source, REQUIRED_CUSTOMER_COLUMNS, "customers")
+
+
+def read_purchases_csv(source) -> pd.DataFrame:
+    """Parse + validate a user-uploaded purchases CSV."""
+    return _read_validated(source, REQUIRED_PURCHASE_COLUMNS, "purchases")
+
+
+def read_support_csv(source) -> pd.DataFrame:
+    """Parse + validate a user-uploaded support-texts CSV."""
+    return _read_validated(source, REQUIRED_SUPPORT_COLUMNS, "support_texts")
