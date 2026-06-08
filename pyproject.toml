@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "churn_recommend"
+version = "0.1.0"
+description = "Churn prediction + cross-sell recommendation Streamlit demo (synthetic, offline)"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "streamlit",
+    "lightgbm",
+    "shap",
+    "plotly",
+    "pandas",
+    "numpy",
+    "scikit-learn",
+    "networkx",
+]
+
+[project.optional-dependencies]
+embeddings = ["sentence-transformers"]
+dev = ["pytest"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src", "."]
+testpaths = ["tests"]
