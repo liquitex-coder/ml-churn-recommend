@@ -1,0 +1,121 @@
+text_id,customer_id,text,sentiment
+T00000,C00024,解約したいのですが手続きを教えてください。,cancellation
+T00001,C00025,新機能がとても便利です、満足しています。,positive
+T00002,C00049,How do I update my payment method?,neutral
+T00003,C00014,領収書がほしいのですが発行できますか？,neutral
+T00004,C00018,請求金額が間違っている気がします。,negative
+T00005,C00026,おすすめプランを教えてもらえて満足です。,positive
+T00006,C00044,とても満足しています、ありがとうございます。,positive
+T00007,C00018,パスワードの再設定方法を教えてください。,neutral
+T00008,C00005,請求書の発行日はいつですか？,neutral
+T00009,C00040,ずっと繋がらない、これでは解約せざるを得ない。,cancellation
+T00010,C00042,サポートの対応が遅くて困ります。,negative
+T00011,C00010,How do I update my payment method?,neutral
+T00012,C00040,パスワードの再設定方法を教えてください。,neutral
+T00013,C00008,How do I update my payment method?,neutral
+T00014,C00038,How do I update my payment method?,neutral
+T00015,C00014,新機能がとても便利です、満足しています。,positive
+T00016,C00018,領収書がほしいのですが発行できますか？,neutral
+T00017,C00036,今日も障害が起きていて不満です。,negative
+T00018,C00024,サービスに不満があり継続するか迷っています。,cancellation
+T00019,C00027,プランの変更方法について質問です。,neutral
+T00020,C00032,請求書の発行日はいつですか？,neutral
+T00021,C00044,領収書がほしいのですが発行できますか？,neutral
+T00022,C00046,How do I update my payment method?,neutral
+T00023,C00036,請求書の発行日はいつですか？,neutral
+T00024,C00013,The app keeps crashing and it is frustrating.,negative
+T00025,C00047,領収書がほしいのですが発行できますか？,neutral
+T00026,C00014,How do I update my payment method?,neutral
+T00027,C00038,おすすめプランを教えてもらえて満足です。,positive
+T00028,C00043,ずっと繋がらない、これでは解約せざるを得ない。,cancellation
+T00029,C00043,他社に乗り換えを検討しています。,cancellation
+T00030,C00013,解約方法を教えてください。,cancellation
+T00031,C00049,新機能がとても便利です、満足しています。,positive
+T00032,C00004,"I want to cancel my subscription, it is too expensive.",cancellation
+T00033,C00035,ずっと繋がらない、これでは解約せざるを得ない。,cancellation
+T00034,C00001,他社に乗り換えを検討しています。,cancellation
+T00035,C00043,competitor の方が安いので乗り換えたい。,cancellation
+T00036,C00015,新機能がとても便利です、満足しています。,positive
+T00037,C00015,新機能がとても便利です、満足しています。,positive
+T00038,C00018,パスワードの再設定方法を教えてください。,neutral
+T00039,C00019,今日も障害が起きていて不満です。,negative
+T00040,C00003,新機能がとても便利です、満足しています。,positive
+T00041,C00043,The app keeps crashing and it is frustrating.,negative
+T00042,C00034,請求書の発行日はいつですか？,neutral
+T00043,C00019,"Great service, very happy with the support!",positive
+T00044,C00037,料金が高いので解約を考えています。,cancellation
+T00045,C00006,新機能がとても便利です、満足しています。,positive
+T00046,C00035,請求金額が間違っている気がします。,negative
+T00047,C00041,新機能がとても便利です、満足しています。,positive
+T00048,C00016,請求書の発行日はいつですか？,neutral
+T00049,C00005,プランの変更方法について質問です。,neutral
+T00050,C00005,プランの変更方法について質問です。,neutral
+T00051,C00031,請求金額が間違っている気がします。,negative
+T00052,C00003,How do I update my payment method?,neutral
+T00053,C00037,解約の違約金はいくらですか？,cancellation
+T00054,C00029,新機能がとても便利です、満足しています。,positive
+T00055,C00009,パスワードの再設定方法を教えてください。,neutral
+T00056,C00048,"Great service, very happy with the support!",positive
+T00057,C00043,解約方法を教えてください。,cancellation
+T00058,C00033,請求書の発行日はいつですか？,neutral
+T00059,C00002,とても満足しています、ありがとうございます。,positive
+T00060,C00011,"Great service, very happy with the support!",positive
+T00061,C00032,とても満足しています、ありがとうございます。,positive
+T00062,C00020,請求書の発行日はいつですか？,neutral
+T00063,C00046,今日も障害が起きていて不満です。,negative
+T00064,C00007,サポートが丁寧で助かりました。,positive
+T00065,C00045,ログインできず非常に困っています。,negative
+T00066,C00048,パスワードの再設定方法を教えてください。,neutral
+T00067,C00044,パスワードの再設定方法を教えてください。,neutral
+T00068,C00001,他社に乗り換えを検討しています。,cancellation
+T00069,C00016,サポートが丁寧で助かりました。,positive
+T00070,C00039,ずっと繋がらない、これでは解約せざるを得ない。,cancellation
+T00071,C00042,他社に乗り換えを検討しています。,cancellation
+T00072,C00017,今日も障害が起きていて不満です。,negative
+T00073,C00047,パスワードの再設定方法を教えてください。,neutral
+T00074,C00023,How do I update my payment method?,neutral
+T00075,C00048,プランの変更方法について質問です。,neutral
+T00076,C00010,請求書の発行日はいつですか？,neutral
+T00077,C00035,とても満足しています、ありがとうございます。,positive
+T00078,C00005,サポートが丁寧で助かりました。,positive
+T00079,C00033,他社に乗り換えを検討しています。,cancellation
+T00080,C00041,おすすめプランを教えてもらえて満足です。,positive
+T00081,C00041,"I want to cancel my subscription, it is too expensive.",cancellation
+T00082,C00023,請求書の発行日はいつですか？,neutral
+T00083,C00044,今日も障害が起きていて不満です。,negative
+T00084,C00003,とても満足しています、ありがとうございます。,positive
+T00085,C00047,サポートの対応が遅くて困ります。,negative
+T00086,C00002,"Great service, very happy with the support!",positive
+T00087,C00037,おすすめプランを教えてもらえて満足です。,positive
+T00088,C00000,領収書がほしいのですが発行できますか？,neutral
+T00089,C00014,請求金額が間違っている気がします。,negative
+T00090,C00036,パスワードの再設定方法を教えてください。,neutral
+T00091,C00001,ログインできず非常に困っています。,negative
+T00092,C00040,ログインできず非常に困っています。,negative
+T00093,C00010,サポートが丁寧で助かりました。,positive
+T00094,C00006,"Great service, very happy with the support!",positive
+T00095,C00032,解約方法を教えてください。,cancellation
+T00096,C00025,新機能がとても便利です、満足しています。,positive
+T00097,C00037,ログインできず非常に困っています。,negative
+T00098,C00044,How do I update my payment method?,neutral
+T00099,C00046,プランの変更方法について質問です。,neutral
+T00100,C00001,The app keeps crashing and it is frustrating.,negative
+T00101,C00014,解約したいのですが手続きを教えてください。,cancellation
+T00102,C00005,パスワードの再設定方法を教えてください。,neutral
+T00103,C00012,How do I update my payment method?,neutral
+T00104,C00037,請求書の発行日はいつですか？,neutral
+T00105,C00043,解約方法を教えてください。,cancellation
+T00106,C00035,"Great service, very happy with the support!",positive
+T00107,C00007,How do I update my payment method?,neutral
+T00108,C00032,請求書の発行日はいつですか？,neutral
+T00109,C00009,解約の違約金はいくらですか？,cancellation
+T00110,C00000,How do I update my payment method?,neutral
+T00111,C00002,パスワードの再設定方法を教えてください。,neutral
+T00112,C00010,請求書の発行日はいつですか？,neutral
+T00113,C00006,プランの変更方法について質問です。,neutral
+T00114,C00034,"I want to cancel my subscription, it is too expensive.",cancellation
+T00115,C00046,"Great service, very happy with the support!",positive
+T00116,C00015,解約の違約金はいくらですか？,cancellation
+T00117,C00038,請求書の発行日はいつですか？,neutral
+T00118,C00016,How do I update my payment method?,neutral
+T00119,C00049,How do I update my payment method?,neutral

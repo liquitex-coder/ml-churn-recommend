@@ -1,0 +1,10 @@
+streamlit
+lightgbm
+shap
+plotly
+pandas
+numpy
+scikit-learn
+networkx
+# Optional: enables the Sentence-Transformers embedding path in text_analytics.
+# sentence-transformers

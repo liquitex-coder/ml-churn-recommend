@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+env/
+
+# Tooling
+.pytest_cache/
+.mypy_cache/
+.ipynb_checkpoints/
+.DS_Store
+
+# NOTE: data/*.csv are intentionally NOT ignored — small synthetic samples are
+# committed so the demo runs offline straight after `git clone` (NFR-2).
